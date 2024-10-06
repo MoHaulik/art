@@ -1,73 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Frame</title>
+    <title>Minimalistisk Billedramme</title>
     <style>
-        body, html {
+        /* Grundlæggende stil for at fjerne margin og padding */
+        * {
             margin: 0;
             padding: 0;
-            height: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Body med baggrundsgradient */
+        body {
+            width: 100vw;
+            height: 100vh;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
 
-        .image-frame {
+        /* Container til billederne */
+        .slideshow-container {
+            position: relative;
             width: 100%;
             height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
         }
 
-        .image-frame img {
-            max-width: 100%;
-            max-height: 100%;
+        /* Fælles stil for begge billeder */
+        .slideshow-container img {
             position: absolute;
-            object-fit: contain;
-            transition: opacity 1s ease;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Sikrer at billedet dækker hele området */
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+        }
+
+        /* Det aktive billede */
+        .slideshow-container img.active {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <div class="image-frame">
-        <img src="GN2BiKIXgAAzoHV.jpeg" alt="Image 1">
-        <img src="GQf0Y8dWoAEmmHe.jpeg" alt="Image 2" style="display: none;">
-        <img src="GSnOcK9XwAASbhy.jpeg" alt="Image 3" style="display: none;">
-        <img src="GTlD3OuXUAEaxBo.jpeg" alt="Image 4" style="display: none;">
-        <img src="GTt0jqcXgAEYffm.jpeg" alt="Image 5" style="display: none;">
-        <img src="GTt0jrdWcAAzEru.jpeg" alt="Image 6" style="display: none;">
-        <img src="GUFK7JwWEAEJUww.jpeg" alt="Image 7" style="display: none;">
-        <img src="GVreWlkXMAE6LrH.jpeg" alt="Image 8" style="display: none;">
-        <img src="GW0AFyoXAAAptHr.jpeg" alt="Image 9" style="display: none;">
-        <img src="GWV7cNBWQAAaz6M.jpeg" alt="Image 10" style="display: none;">
-        <img src="GXS3YwtXEAAxVnX.jpeg" alt="Image 11" style="display: none;">
-        <img src="GXVOIWbXEAEiCfx.jpeg" alt="Image 12" style="display: none;">
-        <img src="GYewGc_WUAAWIzA.jpeg" alt="Image 13" style="display: none;">
-        <img src="GYoCwwDXYAAnbnL.jpeg" alt="Image 14" style="display: none;">
+    <div class="slideshow-container">
+        <!-- Billederne placeres her. Start med at aktivere det første billede. -->
+        <img src="GN2BiKIXgAAzoHV.jpeg" class="active" alt="Billede 1">
+        <img src="GQf0Y8dWoAEmmHe.jpeg" alt="Billede 2">
+        <img src="GSnOcK9XwAASbhy.jpeg" alt="Billede 3">
+        <img src="GTlD3OuXUAEaxBo.jpeg" alt="Billede 4">
+        <img src="GTt0jqcXgAEYffm.jpeg" alt="Billede 5">
+        <img src="GTt0jrdWcAAzEru.jpeg" alt="Billede 6">
+        <img src="GUFK7JwWEAEJUww.jpeg" alt="Billede 7">
+        <img src="GVreWlkXMAE6LrH.jpeg" alt="Billede 8">
+        <img src="GW0AFyoXAAAptHr.jpeg" alt="Billede 9">
+        <img src="GWV7cNBWQAAaz6M.jpeg" alt="Billede 10">
+        <img src="GXS3YwtXEAAxVnX.jpeg" alt="Billede 11">
+        <img src="GXVOIWbXEAEiCfx.jpeg" alt="Billede 12">
+        <img src="GYewGc_WUAAWIzA.jpeg" alt="Billede 13">
+        <img src="GYoCwwDXYAAnbnL.jpeg" alt="Billede 14">
     </div>
 
     <script>
-        const images = document.querySelectorAll('.image-frame img');
-        let currentIndex = 0;
-        const changeInterval = 7 * 60 * 1000; // 7 minutes
+        // Array med alle billeder
+        const images = [
+            "GN2BiKIXgAAzoHV.jpeg",
+            "GQf0Y8dWoAEmmHe.jpeg",
+            "GSnOcK9XwAASbhy.jpeg",
+            "GTlD3OuXUAEaxBo.jpeg",
+            "GTt0jqcXgAEYffm.jpeg",
+            "GTt0jrdWcAAzEru.jpeg",
+            "GUFK7JwWEAEJUww.jpeg",
+            "GVreWlkXMAE6LrH.jpeg",
+            "GW0AFyoXAAAptHr.jpeg",
+            "GWV7cNBWQAAaz6M.jpeg",
+            "GXS3YwtXEAAxVnX.jpeg",
+            "GXVOIWbXEAEiCfx.jpeg",
+            "GYewGc_WUAAWIzA.jpeg",
+            "GYoCwwDXYAAnbnL.jpeg"
+        ];
 
+        let currentIndex = 0; // Aktuelt billede
+        const displayTime = 7 * 60 * 1000; // 7 minutter i millisekunder
+
+        const slideshowContainer = document.querySelector('.slideshow-container');
+        const imgElements = slideshowContainer.querySelectorAll('img');
+
+        // Funktion til at vise det næste billede
         function showNextImage() {
-            images[currentIndex].style.display = 'none';
+            // Fjern 'active' klassen fra det nuværende billede
+            imgElements[currentIndex].classList.remove('active');
+
+            // Beregn næste indeks
             currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].style.display = 'block';
+
+            // Tilføj 'active' klassen til det næste billede
+            imgElements[currentIndex].classList.add('active');
         }
 
-        // Cycle through images every 7 minutes
-        setInterval(showNextImage, changeInterval);
+        // Start timeren til at skifte billede hvert 7. minut
+        let timer = setInterval(showNextImage, displayTime);
 
-        // Change image on click
-        document.querySelector('.image-frame').addEventListener('click', showNextImage);
+        // Tilføj klik-hændelse til at skifte billede manuelt
+        slideshowContainer.addEventListener('click', () => {
+            showNextImage();
+            // Nulstil timeren, så den næste skift sker 7 minutter efter det manuelle skift
+            clearInterval(timer);
+            timer = setInterval(showNextImage, displayTime);
+        });
+
+        // Valgfri: For at sikre at kun relevante billeder er synlige (håndtering af klasser)
+        imgElements.forEach((img, index) => {
+            if(index === 0){
+                img.classList.add('active');
+            } else {
+                img.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
