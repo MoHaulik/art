@@ -28,16 +28,17 @@
             position: relative;
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
         }
 
-        /* Fælles stil for begge billeder */
+        /* Stil for billederne */
         .slideshow-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Sikrer at billedet dækker hele området */
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Sikrer, at billedet ikke strækkes eller beskæres */
             transition: opacity 1s ease-in-out;
             opacity: 0;
         }
