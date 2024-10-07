@@ -39,7 +39,7 @@
         .slideshow-container img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Sikrer at billedet hele tiden vises i fuld størrelse */
+            object-fit: contain;
             transition: opacity 1s ease-in-out;
             opacity: 0;
             position: absolute;
@@ -68,6 +68,27 @@
         <img src="GXVOIWbXEAEiCfx.jpeg" alt="Billede 12">
         <img src="GYewGc_WUAAWIzA.jpeg" alt="Billede 13">
         <img src="GYoCwwDXYAAnbnL.jpeg" alt="Billede 14">
+        <img src="215422@2x.jpg" alt="Billede 15">
+        <img src="Aivazovsky_Passage_of_the_Jews_through_the_Red_Sea.jpg" alt="Billede 16">
+        <img src="Alexandre_Cabanel_-_Fallen_Angel.jpg" alt="Billede 17">
+        <img src="Ayvaz_sredy_voln.jpg" alt="Billede 18">
+        <img src="Bonaparte_ante_la_Esfinge,_por_Jean-me.jpg" alt="Billede 19">
+        <img src="FrBCNRsWIAAnHVl.jpeg" alt="Billede 20">
+        <img src="Giovanni_Domenico_Tiepolo_-_The_Building_of_the_Trojan_Horse,_1773-1774.jpg" alt="Billede 21">
+        <img src="Hubert_Robert_-_Roman_Ruins.JPG" alt="Billede 22">
+        <img src="John_Martin_-_Sodom_and_Gomorrah.jpg" alt="Billede 23">
+        <img src="Jules_Lefebvre_-_The_grasshopper_-_Google_Art_Project.jpg" alt="Billede 24">
+        <img src="La_Vérité,_par_Jules_Joseph_Lefebvre.jpg" alt="Billede 25">
+        <img src="Lady_godiva_full.jpg" alt="Billede 26">
+        <img src="Martin,_John_-_The_Seventh_Plague_-_1823.jpg" alt="Billede 27">
+        <img src="Nicholas_Roerich_-_Signs_of_Christ_1924_-_(MeisterDrucke-758477).jpg" alt="Billede 28">
+        <img src="Perseus_Confronting_Phineus_with_the_Head_of_Medusa_by_Sebastiano_Ricci,_c._1705-10.JPG" alt="Billede 29">
+        <img src="Picture_\"anger_of_the_seas\"_by_Aivasovsky.jpg" alt="Billede 30">
+        <img src="pluto-franz-von-stuck.jpg" alt="Billede 31">
+        <img src="Po_vodam.jpg" alt="Billede 32">
+        <img src="The_Icebergs_(Frederic_Edwin_Church),_1861_(color).jpg" alt="Billede 33">
+        <img src="The_Ides_of_March_Edward_John_Poynter_(1836–1919).jpg" alt="Billede 34">
+        <img src="The_Roses_of_Heliogabalus.jpg" alt="Billede 35">
     </div>
 
     <script>
@@ -86,7 +107,28 @@
             "GXS3YwtXEAAxVnX.jpeg",
             "GXVOIWbXEAEiCfx.jpeg",
             "GYewGc_WUAAWIzA.jpeg",
-            "GYoCwwDXYAAnbnL.jpeg"
+            "GYoCwwDXYAAnbnL.jpeg",
+            "215422@2x.jpg",
+            "Aivazovsky_Passage_of_the_Jews_through_the_Red_Sea.jpg",
+            "Alexandre_Cabanel_-_Fallen_Angel.jpg",
+            "Ayvaz_sredy_voln.jpg",
+            "Bonaparte_ante_la_Esfinge,_por_Jean-me.jpg",
+            "FrBCNRsWIAAnHVl.jpeg",
+            "Giovanni_Domenico_Tiepolo_-_The_Building_of_the_Trojan_Horse,_1773-1774.jpg",
+            "Hubert_Robert_-_Roman_Ruins.JPG",
+            "John_Martin_-_Sodom_and_Gomorrah.jpg",
+            "Jules_Lefebvre_-_The_grasshopper_-_Google_Art_Project.jpg",
+            "La_Vérité,_par_Jules_Joseph_Lefebvre.jpg",
+            "Lady_godiva_full.jpg",
+            "Martin,_John_-_The_Seventh_Plague_-_1823.jpg",
+            "Nicholas_Roerich_-_Signs_of_Christ_1924_-_(MeisterDrucke-758477).jpg",
+            "Perseus_Confronting_Phineus_with_the_Head_of_Medusa_by_Sebastiano_Ricci,_c._1705-10.JPG",
+            "Picture_\"anger_of_the_seas\"_by_Aivasovsky.jpg",
+            "pluto-franz-von-stuck.jpg",
+            "Po_vodam.jpg",
+            "The_Icebergs_(Frederic_Edwin_Church),_1861_(color).jpg",
+            "The_Ides_of_March_Edward_John_Poynter_(1836–1919).jpg",
+            "The_Roses_of_Heliogabalus.jpg"
         ];
 
         let currentIndex = 0; // Aktuelt billede
@@ -95,17 +137,28 @@
         const slideshowContainer = document.querySelector('.slideshow-container');
         const imgElements = slideshowContainer.querySelectorAll('img');
 
+        // Funktion til at vise billederne i tilfældig rækkefølge
+        function shuffleImages() {
+            for (let i = imgElements.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [imgElements[i], imgElements[j]] = [imgElements[j], imgElements[i]];
+            }
+
+            // Append de shufflerede billeder til containeren
+            imgElements.forEach(img => slideshowContainer.appendChild(img));
+        }
+
         // Funktion til at vise det næste billede
         function showNextImage() {
-            // Fjern 'active' klassen fra det nuværende billede
             imgElements[currentIndex].classList.remove('active');
 
-            // Beregn næste indeks
-            currentIndex = (currentIndex + 1) % images.length;
+            currentIndex = (currentIndex + 1) % imgElements.length;
 
-            // Tilføj 'active' klassen til det næste billede
             imgElements[currentIndex].classList.add('active');
         }
+
+        // Shuffle billederne ved indlæsning
+        shuffleImages();
 
         // Start timeren til at skifte billede hvert 7. minut
         let timer = setInterval(showNextImage, displayTime);
@@ -113,7 +166,6 @@
         // Tilføj klik-hændelse til at skifte billede manuelt
         slideshowContainer.addEventListener('click', () => {
             showNextImage();
-            // Nulstil timeren, så den næste skift sker 7 minutter efter det manuelle skift
             clearInterval(timer);
             timer = setInterval(showNextImage, displayTime);
         });
