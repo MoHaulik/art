@@ -86,11 +86,41 @@
 </head>
 <body>
     <div class="slideshow-container" id="slideshow">
-        <!-- Billederne placeres her. Start med at aktivere det første billede. -->
+        <!-- Alle 35 billeder -->
         <img src="GN2BiKIXgAAzoHV.jpeg" class="active" alt="Billede 1">
         <img src="GQf0Y8dWoAEmmHe.jpeg" alt="Billede 2">
         <img src="GSnOcK9XwAASbhy.jpeg" alt="Billede 3">
-        <!-- ... (rest of your images) ... -->
+        <img src="GTlD3OuXUAEaxBo.jpeg" alt="Billede 4">
+        <img src="GTt0jqcXgAEYffm.jpeg" alt="Billede 5">
+        <img src="GTt0jrdWcAAzEru.jpeg" alt="Billede 6">
+        <img src="GUFK7JwWEAEJUww.jpeg" alt="Billede 7">
+        <img src="GVreWlkXMAE6LrH.jpeg" alt="Billede 8">
+        <img src="GW0AFyoXAAAptHr.jpeg" alt="Billede 9">
+        <img src="GWV7cNBWQAAaz6M.jpeg" alt="Billede 10">
+        <img src="GXS3YwtXEAAxVnX.jpeg" alt="Billede 11">
+        <img src="GXVOIWbXEAEiCfx.jpeg" alt="Billede 12">
+        <img src="GYewGc_WUAAWIzA.jpeg" alt="Billede 13">
+        <img src="GYoCwwDXYAAnbnL.jpeg" alt="Billede 14">
+        <img src="215422@2x.jpg" alt="Billede 15">
+        <img src="Aivazovsky_Passage_of_the_Jews_through_the_Red_Sea.jpg" alt="Billede 16">
+        <img src="Alexandre_Cabanel_-_Fallen_Angel.jpg" alt="Billede 17">
+        <img src="Ayvaz_sredy_voln.jpg" alt="Billede 18">
+        <img src="Bonaparte_ante_la_Esfinge,_por_Jean-me.jpg" alt="Billede 19">
+        <img src="FrBCNRsWIAAnHVl.jpeg" alt="Billede 20">
+        <img src="Giovanni_Domenico_Tiepolo_-_The_Building_of_the_Trojan_Horse,_1773-1774.jpg" alt="Billede 21">
+        <img src="Hubert_Robert_-_Roman_Ruins.JPG" alt="Billede 22">
+        <img src="John_Martin_-_Sodom_and_Gomorrah.jpg" alt="Billede 23">
+        <img src="Jules_Lefebvre_-_The_grasshopper_-_Google_Art_Project.jpg" alt="Billede 24">
+        <img src="La_Vérité,_par_Jules_Joseph_Lefebvre.jpg" alt="Billede 25">
+        <img src="Lady_godiva_full.jpg" alt="Billede 26">
+        <img src="Martin,_John_-_The_Seventh_Plague_-_1823.jpg" alt="Billede 27">
+        <img src="Nicholas_Roerich_-_Signs_of_Christ_1924_-_(MeisterDrucke-758477).jpg" alt="Billede 28">
+        <img src="Perseus_Confronting_Phineus_with_the_Head_of_Medusa_by_Sebastiano_Ricci,_c._1705-10.JPG" alt="Billede 29">
+        <img src="Picture_\"anger_of_the_seas\"_by_Aivasovsky.jpg" alt="Billede 30">
+        <img src="pluto-franz-von-stuck.jpg" alt="Billede 31">
+        <img src="Po_vodam.jpg" alt="Billede 32">
+        <img src="The_Icebergs_(Frederic_Edwin_Church),_1861_(color).jpg" alt="Billede 33">
+        <img src="The_Ides_of_March_Edward_John_Poynter_(1836–1919).jpg" alt="Billede 34">
         <img src="The_Roses_of_Heliogabalus.jpg" alt="Billede 35">
     </div>
 
@@ -140,7 +170,7 @@
         let currentIndex = 0; // Aktuelt billede
         const displayTime = 7 * 60 * 1000; // 7 minutter i millisekunder
 
-        const slideshowContainer = document.querySelector('.slideshow-container');
+        const slideshowContainer = document.getElementById('slideshow');
         const imgElements = slideshowContainer.querySelectorAll('img');
         const fullscreenBtn = document.getElementById('fullscreenBtn');
 
