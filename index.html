@@ -12,11 +12,10 @@
             box-sizing: border-box;
         }
 
-        /* Body med baggrundsgradient */
+        /* Body styling */
         body {
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -29,11 +28,27 @@
             position: relative;
             width: 90vw;
             height: 90vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+        }
+
+        /* Blurred background of current image (Option 4) */
+        .slideshow-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--background-image);
+            background-position: center center;
+            background-size: cover;
+            filter: blur(20px);
+            transform: scale(1.2);
+            z-index: -1;
+            transition: background-image 1s ease-in-out;
         }
 
         /* Fælles stil for billeder */
@@ -44,6 +59,9 @@
             transition: opacity 1s ease-in-out;
             opacity: 0;
             position: absolute;
+            border: 15px solid #fff;           /* Option 5: Decorative border */
+            border-radius: 10px;               /* Option 5: Rounded corners */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Option 20: Shadow effect */
         }
 
         /* Det aktive billede */
@@ -86,7 +104,7 @@
 </head>
 <body>
     <div class="slideshow-container" id="slideshow">
-        <!-- Alle 35 billeder -->
+        <!-- Alle 78 billeder -->
         <img src="GN2BiKIXgAAzoHV.jpeg" class="active" alt="Billede 1">
         <img src="GQf0Y8dWoAEmmHe.jpeg" alt="Billede 2">
         <img src="GSnOcK9XwAASbhy.jpeg" alt="Billede 3">
@@ -122,7 +140,6 @@
         <img src="The_Icebergs_(Frederic_Edwin_Church),_1861_(color).jpg" alt="Billede 33">
         <img src="The_Ides_of_March_Edward_John_Poynter_(1836–1919).jpg" alt="Billede 34">
         <img src="The_Roses_of_Heliogabalus.jpg" alt="Billede 35">
-
         <!-- New files -->
         <img src="5644454836_433202d8b7_o.jpg" alt="Billede 36">
         <img src="5wuim9sfk0gc1.jpg" alt="Billede 37">
@@ -204,7 +221,7 @@
             "Martin,_John_-_The_Seventh_Plague_-_1823.jpg",
             "Nicholas_Roerich_-_Signs_of_Christ_1924_-_(MeisterDrucke-758477).jpg",
             "Perseus_Confronting_Phineus_with_the_Head_of_Medusa_by_Sebastiano_Ricci,_c._1705-10.JPG",
-            "Picture_\anger_of_the_seas\_by_Aivasovsky.jpg",
+            "Picture_anger_of_the_seas_by_Aivasovsky.jpg",
             "pluto-franz-von-stuck.jpg",
             "Po_vodam.jpg",
             "The_Icebergs_(Frederic_Edwin_Church),_1861_(color).jpg",
@@ -281,6 +298,15 @@
             currentIndex = (currentIndex + 1) % imgElements.length;
 
             imgElements[currentIndex].classList.add('active');
+
+            // Update background image (Option 4)
+            updateBackgroundImage();
+        }
+
+        // Funktion til at opdatere baggrundsbilledet (Option 4)
+        function updateBackgroundImage() {
+            const currentImageSrc = imgElements[currentIndex].getAttribute('src');
+            slideshowContainer.style.setProperty('--background-image', `url(${currentImageSrc})`);
         }
 
         // Shuffle billederne ved indlæsning
@@ -304,6 +330,9 @@
                 img.classList.remove('active');
             }
         });
+
+        // Initialize the background image (Option 4)
+        updateBackgroundImage();
 
         // Funktion til at enter fullscreen
         function enterFullscreen() {
